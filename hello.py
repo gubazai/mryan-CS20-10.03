@@ -1,5 +1,6 @@
 import os
 from flask import Flask, url_for, render_template, request
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -15,8 +16,8 @@ def render_ftoc():
     return render_template('ftoc.html')
 
 @app.route('/mtokm')
-def render_ftoc():
-    return render_template('ftoc.html')
+def render_mtokm():
+    return render_template('mtokm.html')
 
 @app.route('/ftoc_result')
 def render_ftoc_result():
@@ -35,6 +36,27 @@ def render_ctof_result():
         return render_template('ctof_result.html', cTemp=ctemp_result, fTemp=ftemp_result)
     except ValueError:
         return "Sorry: something went wrong."
+        
+@app.route('/mtokm_result')
+def render_mtokm_result():
+    try:
+        miles_result = float(request.args['miles'])
+        kilometers_result = mtokm(miles_result)
+        return render_template('mtokm_result.html', miles=miles_result, kilometers=kilometers_result)
+    except ValueError:
+        return "Sorry. Could not convert " + milesString + " to a number."
+
+def ftoc(ftemp):
+   return (ftemp-32.0)*(5.0/9.0)
+
+def ctof(ctemp):
+    return (ctemp*(9/5)) + 32
+
+def mtokm(miles):
+    return miles * 1.6
+    
+if __name__ == "__main__":
+    app.run(debug=False, port=5000)
         
     
 
