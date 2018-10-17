@@ -4,6 +4,12 @@
 
 {%  block content %}
 
-<p> In Miles: {{ Miles }}.  In Kilometers: {{ Kilometers }} </p>
+<p>Enter a distance in miles and click "submit" to convert to kilometers</p>
+
+<form action="/mtokm_result">
+  Miles Distance:<br>
+  <input type="text" name="Miles" value="68.0">
+  <input type="submit" value="Submit">
+</form>
 
 {%  endblock %}
